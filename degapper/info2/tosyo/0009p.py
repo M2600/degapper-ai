@@ -1,0 +1,5 @@
+print(getwd())
+sweets = read.csv('nomimono.csv', h=T, row_names=1)
+result = prcomp(sweets, scale=T)
+plot(result.x)
+text(result.x, rownames(sweets), pos=1, cex=1.4)
