@@ -81,15 +81,18 @@ def main():
         gaps = call_degapper(tree_lines)
     else:
         print("No routes found in the provided files.")
+        return
     if gaps:
         gaps_lines = gaps.split("\n") if gaps else []
         gap_counts = call_count_degaps(gaps_lines)
     else:
         print("No gaps found in the provided routes.")
+        return
     if gap_counts:
         print(gap_counts)
     else:
         print("No gap counts available.")
+        return
 
 if __name__ == "__main__":
     main()
