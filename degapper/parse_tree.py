@@ -1,31 +1,27 @@
-import os
-import argparse
+from .tools.Visitor import Visitor
 
-from glob import glob
+class ParseTree:
+    def __init__(self):
+        pass
 
-from tools.Visitor import Visitor
+    def extract_routes(self, file):
+        with open(file, "r", encoding="utf-8") as f:
+            code = f.read()
+        name = file.replace(".py", "")
+        routes = Visitor(code).visit(isFirst=True)
+        # 重複を削除しながら順序を保持
+        seen = set()
+        unique_routes = []
+        for route in routes:
+            if route not in seen:
+                unique_routes.append(route)
+                seen.add(route)
+        return name, unique_routes
 
-
-parser = argparse.ArgumentParser()
-parser.add_argument("dir")
-args = parser.parse_args()
-
-files = sorted(glob(f"{args.dir}/*/*.py"))
-print("name,component")
-for file in files:
-    with open(file, "r", encoding="utf-8") as f:
-        code = f.read()
-
-    name = file.replace(".py", "")
-
-    # 全経路を取得
-    routes = Visitor(code).visit(isFirst=True)
-
-    # 重複を削除しながら、検出順をキープする
-    _routes = []
-    for route in routes:
-        if route not in _routes:
-            _routes.append(route)
-
-    for i, route in enumerate(_routes, start=1):
-        print(f"{name}-{i:03d},{route}")
+    def process_files(self, files):
+        results = []
+        for file in files:
+            name, routes = self.extract_routes(file)
+            for i, route in enumerate(routes, start=1):
+                results.append((f"{name}-{i:03d}", route))
+        return results
