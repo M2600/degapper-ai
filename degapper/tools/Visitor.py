@@ -1,6 +1,6 @@
 import ast
 
-from tools.utils import changeNameNode
+from ..tools.utils import changeNameNode
 
 
 class Visitor():
