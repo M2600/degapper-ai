@@ -1,2 +1,2 @@
-# AI-De-Gap
+# degapper-ai
 AI sample program generator for education
