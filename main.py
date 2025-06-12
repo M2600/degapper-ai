@@ -15,7 +15,7 @@ args = parser.parse_args()
 
 def call_parse_tree():
 
-    files = sorted(glob(f"{args.dir}/*/*.py"))
+    files = sorted(glob(f"{args.dir}/**/*.py", recursive=True))
     if not files:
         print("No Python files found in the specified directory.")
         return
