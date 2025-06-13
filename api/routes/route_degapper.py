@@ -2,6 +2,6 @@ from fastapi import APIRouter
 
 router = APIRouter()
 
-@router.get("/", tags=["degapper", "mcp_public"])
+@router.get("/", tags=["mcp_public"])
 def degapper():
     pass
